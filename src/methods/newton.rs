@@ -1,6 +1,3 @@
-use std::f64;
-use std::num;
-
 fn first_derivative(f: &Fn(f64)-> f64, x: f64, h: f64) -> f64 {
     return (f(x + h) - f(x)) / h;
 }

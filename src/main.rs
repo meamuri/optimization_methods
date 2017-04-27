@@ -2,26 +2,34 @@ extern crate OptimizationMethods;
 
 use OptimizationMethods::methods::segment_div::segment_divide;
 use OptimizationMethods::methods::golden_section::golden_section;
+use OptimizationMethods::methods::newton::newton_method;
 
 use OptimizationMethods::dialogs::{user_input, input2f64};
 
 fn main() {
-    let mut a : 	f64 = 0.0;
-	let mut b : 	f64 = 0.0;
+    let mut a   : 	f64 = 0.0;
+	let mut b   : 	f64 = 0.0;
 	let mut eps : 	f64 = 0.0;
 
 	let mut input = user_input("Введите a:");
-	input2f64(&input, &mut a);
-	println!("{}", a);
+	input2f64(&input, &mut a);	
 
 	input = user_input("Введите b:");
-	input2f64(&input, &mut b);
-	println!("{}", b);
+	input2f64(&input, &mut b);	
 
 	input = user_input("Введите eps:");
-	input2f64(&input, &mut eps);
-	println!("{}", eps);
+	input2f64(&input, &mut eps);	
 
-	let res = segment_divide(a, b, eps, &|x: f64| -> f64 { x*x } );
+	let mut res = segment_divide(a, b, eps, &|x: f64| -> f64 { x*x } );    
+    println!("{:?}", res);
+    res = golden_section(a, b, eps, &|x: f64| -> f64 { x*x } );
+    println!("{:?}", res);
+    
+    let mut u0 : 	f64 = 0.0;
+
+    input = user_input("Введите начальную точку:");
+	input2f64(&input, &mut u0);
+
+    res = newton_method(a, b, u0, eps, &|x: f64| -> f64 { x*x } );
 	println!("{:?}", res);
 }
