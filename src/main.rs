@@ -15,20 +15,22 @@ fn main() {
     //let f = &simple_sqr_with_offset;
     let f = &|x: f64| -> f64 { x*x } ;
 	
-    let mut input = user_input("Введите a:");
+    let mut input = "".to_string(); 
+    
+    input = user_input("Введите a (левая граница):");
 	input2f64(&input, &mut a);	
 
-	input = user_input("Введите b:");
+	input = user_input("Введите b (правая граница):");
 	input2f64(&input, &mut b);	
 
-	input = user_input("Введите eps:");
+	input = user_input("Введите eps (погрешность):");
 	input2f64(&input, &mut eps);	
 
     let mut res = segment_divide(a, b, eps, f );    
-    println!("{:?}", res);
+    println!("метод деления отрезка \t {:?}", res);
 
     res = golden_section(a, b, eps, f );
-    println!("{:?}", res);
+    println!("метод золотого сечения \t {:?}", res);
     
     let mut u0 : 	f64 = 0.0;
 
@@ -36,5 +38,5 @@ fn main() {
 	input2f64(&input, &mut u0);
 
     res = newton_method(a, b, u0, eps, f );
-	println!("{:?}", res);
+	println!("метод Ньютона \t {:?}", res);
 }
