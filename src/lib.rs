@@ -1,3 +1,3 @@
 pub mod methods;
-mod functions;
+pub mod functions;
 pub mod dialogs;

@@ -5,13 +5,17 @@ use OptimizationMethods::methods::golden_section::golden_section;
 use OptimizationMethods::methods::newton::newton_method;
 
 use OptimizationMethods::dialogs::{user_input, input2f64};
+use OptimizationMethods::functions::{simple_sqr_with_offset, ivan_fn};
 
 fn main() {
     let mut a   : 	f64 = 0.0;
 	let mut b   : 	f64 = 0.0;
 	let mut eps : 	f64 = 0.0;
 
-	let mut input = user_input("Введите a:");
+    //let f = &simple_sqr_with_offset;
+    let f = &|x: f64| -> f64 { x*x } ;
+	
+    let mut input = user_input("Введите a:");
 	input2f64(&input, &mut a);	
 
 	input = user_input("Введите b:");
@@ -20,9 +24,10 @@ fn main() {
 	input = user_input("Введите eps:");
 	input2f64(&input, &mut eps);	
 
-	let mut res = segment_divide(a, b, eps, &|x: f64| -> f64 { x*x } );    
+    let mut res = segment_divide(a, b, eps, f );    
     println!("{:?}", res);
-    res = golden_section(a, b, eps, &|x: f64| -> f64 { x*x } );
+
+    res = golden_section(a, b, eps, f );
     println!("{:?}", res);
     
     let mut u0 : 	f64 = 0.0;
@@ -30,6 +35,6 @@ fn main() {
     input = user_input("Введите начальную точку:");
 	input2f64(&input, &mut u0);
 
-    res = newton_method(a, b, u0, eps, &|x: f64| -> f64 { x*x } );
+    res = newton_method(a, b, u0, eps, f );
 	println!("{:?}", res);
 }
