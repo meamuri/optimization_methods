@@ -1,0 +1,6 @@
+[package]
+name = "OptimizationMethods"
+version = "0.1.0"
+authors = ["meamuri <meammf@yandex.ru>"]
+
+[dependencies]
