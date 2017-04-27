@@ -1,6 +1,8 @@
 extern crate OptimizationMethods; 
 
 use OptimizationMethods::methods::segment_div::segment_divide;
+use OptimizationMethods::methods::golden_section::golden_section;
+
 use OptimizationMethods::dialogs::{user_input, input2f64};
 
 fn main() {
