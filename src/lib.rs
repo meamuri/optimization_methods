@@ -1,8 +1,3 @@
-mod methods {
-    mod segment_divide;
-    mod parabolic;
-    mod newton;
-    mod golden_section;
-}
+pub mod methods;
 mod functions;
-mod dialogs;
+pub mod dialogs;
