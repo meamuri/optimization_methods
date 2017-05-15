@@ -11,9 +11,8 @@ pub fn user_input(msg: &str) -> String {
 	}
 }
 
-pub fn input2f64(input: &str, result: &mut f64) -> bool {	
-	let trimmed = input.trim();
-    match trimmed.parse::<f64>() {
+pub fn input2f64(input: &str, result: &mut f64) -> bool {		
+    match input.trim().parse::<f64>() {
         Ok(num) => {
 			*result = num;
 			return true;

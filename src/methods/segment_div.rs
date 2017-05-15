@@ -18,5 +18,5 @@ pub fn segment_divide(
 			a = u1;
 		}		
 	}
-	return (a + b) / 2.0;
+	(a + b) / 2.0
 }

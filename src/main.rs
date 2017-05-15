@@ -13,13 +13,13 @@ fn main() {
 	let mut eps : 	f64 = 0.0;
 
     //let f = &simple_sqr_with_offset;
-    let f = &|x: f64| -> f64 { x*x } ;
+    let f = &|x: f64| -> f64 { x*x*x*x - x*x } ;
 	
-    let mut input = "".to_string(); 
+    let mut input = String::new(); 
     
     input = user_input("Введите a (левая граница):");
 	input2f64(&input, &mut a);	
-
+ 
 	input = user_input("Введите b (правая граница):");
 	input2f64(&input, &mut b);	
 

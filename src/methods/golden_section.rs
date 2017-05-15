@@ -1,11 +1,11 @@
 fn fn_u1(a: f64, b: f64) -> f64 {
     let k1 = (3.0 - 5_f64.sqrt()) / 2.0;
-    return k1 * (b - a) + a;
+    k1 * (b - a) + a
 }
 
 fn fn_u2(a: f64, b: f64) -> f64 {
     let k2 = (5_f64.sqrt() - 1.0) / 2.0;
-    return k2 * (b - a) + a;
+    k2 * (b - a) + a
 }
 
 pub fn golden_section(_a: f64, _b: f64, eps: f64, f: &Fn(f64) -> f64) -> f64 {
@@ -26,5 +26,5 @@ pub fn golden_section(_a: f64, _b: f64, eps: f64, f: &Fn(f64) -> f64) -> f64 {
             u2 = fn_u2(a, b);
         }
     }
-    return (a + b) / 2.0;
+    (a + b) / 2.0
 }

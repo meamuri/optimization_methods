@@ -1,9 +1,9 @@
 fn first_derivative(f: &Fn(f64)-> f64, x: f64, h: f64) -> f64 {
-    return (f(x + h) - f(x)) / h;
+    (f(x + h) - f(x)) / h
 }
 
 fn second_derivative(f: &Fn(f64) -> f64, x: f64, h: f64) -> f64 {
-    return (f(x + h) - 2.0*f(x) + f(x - h)) / h.powf(2.0);
+    (f(x + h) - 2.0*f(x) + f(x - h)) / h.powf(2.0)
 }
 
 pub fn newton_method(a: f64, b: f64, _u0: f64, eps: f64, f: &Fn(f64) -> f64) -> f64 {
@@ -14,5 +14,5 @@ pub fn newton_method(a: f64, b: f64, _u0: f64, eps: f64, f: &Fn(f64) -> f64) -> 
     if u0 >= a && u0 <= b {
         return u0;
     }
-    return if u0 <= a { a } else { b };
+    if u0 <= a { a } else { b }
 }
