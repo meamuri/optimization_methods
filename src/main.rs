@@ -1,11 +1,10 @@
-extern crate OptimizationMethods; 
+extern crate optimization_methods; 
 
-use OptimizationMethods::methods::segment_div::segment_divide;
-use OptimizationMethods::methods::golden_section::golden_section;
-use OptimizationMethods::methods::newton::newton_method;
+use optimization_methods::methods::single_dim_methods::segment_div::segment_divide;
+use optimization_methods::methods::single_dim_methods::golden_section::golden_section;
+use optimization_methods::methods::single_dim_methods::newton::newton_method;
 
-use OptimizationMethods::dialogs::{user_input, input2f64};
-use OptimizationMethods::functions::{simple_sqr_with_offset, ivan_fn};
+use optimization_methods::dialogs::{user_input, input2f64};
 
 fn main() {
     let mut a   : 	f64 = 0.0;
@@ -15,9 +14,7 @@ fn main() {
     //let f = &simple_sqr_with_offset;
     let f = &|x: f64| -> f64 { x*x*x*x - x*x } ;
 	
-    let mut input = String::new(); 
-    
-    input = user_input("Введите a (левая граница):");
+    let mut input = user_input("Введите a (левая граница):");
 	input2f64(&input, &mut a);	
  
 	input = user_input("Введите b (правая граница):");
