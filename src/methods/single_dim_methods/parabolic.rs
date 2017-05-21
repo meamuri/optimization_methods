@@ -1,65 +1,69 @@
-// pub fn parabolic_method(_a: f64, _b: f64, u0: f64, eps: f64, f: &Fn(f64) -> f64) -> f64 {
-//     let mut a = _a;
-//     let mut b = _b;
-//     let i = 2;
-//     let h = (b - a) / 16.0;
+pub fn parabolic_method(a: f64, b: f64, eps: f64, f: &Fn(f64) -> f64) -> f64 {    
+    let mut u1 = a; 
+    let mut u2 = (a + b) / 2.0;
+    let mut u3 = b;
+    while (u3 - u1) >= eps && u2 >= a && u2 <= b {
+        let d = parabolas_min(u1, u2, u3, f);
+        let (i1, i2, i3) = (f(u1), f(u2), f(u3));
+        let i_min = f(d);
+        if d > u2 {            
+            if i_min < i2{
+                u3 = u2;
+                u2 = d;
+            }
+            else if i_min > i2 {
+                u1 = d;
+            }
+            else {
+                if i1 > i2 {
+                    u3 = u2;
+                    u2 = d;
+                }
+                else if i2 > i3 {
+                    u1 = d;
+                }
+            }            
+        }
+        else if d > u2 {
+            if i_min < i2 {
+                u1 = u2;
+                u2 = d;
+            }
+            else if i_min > i2{
+                u3 = d;
+            }
+            else {
+                if i3 > i2 {
+                    u1 = u2;
+                    u2 = d;
+                }
+                else if i1 > i2 {
+                    u3 = d;
+                }
+            }
+        }
+        else {
+            if f(u2 - eps) < i2{
+                u2 -= eps;
+            }
+            else if f(u2 + eps) < i2 {
+                u2 += eps;
+            }
+            else {
+                break;
+            }
+        } // else  
+    } // while
 
-//     let mut t0 = u0;
-//     let mut t1 = t0 + h;
-//     let mut t2 = 0.0;
-
-//     loop {
-//         let mut I0 = f(t0);
-//         let mut I1 = f(t1);
-
-//         if I1 <= I0 {
-//             t2 = t0 + h * (2.powf(i as f64));
-//         } else {
-//             t1 = t0 - h;
-//             I1 = f(t1);
-//             t2 = t0 - h * (2.powf(i as f64));
-//         }
-//         let I2 = f(t2);
-
-//         if (t0 - t2).abs() < eps || (I0 - I2).abs() < eps {
-//             return t0;
-//         }
-
-//         if t2 >= a && t2 <= b {
-//             if is_convex(t0, t1, t2, f) {
-//                 return W(t0, t1, t2, f);
-//             } else {
-//                 t0 = t2;
-//                 t1 = t2 + h;
-//                 i += 1;
-//             }        
-//         } else {
-//             let w = if t2 < a {a} else {b};
-//             if (t0 - w).abs() < eps {
-//                 return t0;
-//             }
-            
-//             let In = std::cmp::min(w, std::cmp::min(t0, 1));
-//         }
-//     }
-// }
+    if u2 > a { a } else if u2 > a { b } else { u2 }         
+     
+} // fn parabolic_method
 
 
-// fn is_convex(u1: f64, u2: f64, u3: f64, f: &Fn(f64) -> f64) -> bool {
-//     let d1 = f(u1) - f(u2);
-//     let d2 = f(u3) - f(u2);
-//     return d1 >= 0.0 && d2 >= 0.0 && d1 + d2 > 0.0;
-// }
-
-// fn W(u1: f64, u2: f64, u3: f64, f: &Fn(f64) -> f64 ) -> f64 {
-//     let I1 = f(u1);
-//     let I2 = f(u2);
-//     let I3 = f(u3);
-//     return -0.5 * (
-//         (I2 - I1) * u3 * u3 + 
-//         (I1 - I3) * u2 * u2 + 
-//         (I3 - I2) * u1 * u1) / (
-//             (I1 - I2) * u3 + 
-//             (I3 - I1) * u2 + 
-//             (I2 - I3) * u1)
-// }
+fn parabolas_min(u1: f64, u2: f64, u3: f64, f: &Fn(f64) -> f64) -> f64 {
+    let i1 = f(u1);
+    let i2 = f(u2);
+    let i3 = f(u3);
+    -0.5 * ((i2 - i1)*u3*u3 + (i1 - i3)*u2*u2 + (i3 - i2)*u1*u1) /
+            ((i1 - i2)*u3 + (i3 - i1)*u2 + (i2 - i3)*u1)
+}

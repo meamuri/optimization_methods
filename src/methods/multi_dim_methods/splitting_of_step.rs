@@ -1,12 +1,14 @@
+use super::{x_derivative, y_derivative, norm};
+
 pub fn splitting_of_step(x: f64, y: f64, alpha: f64, eps: f64, f: &Fn(f64, f64) -> f64) -> (f64, f64) {
     let (mut x, mut y, mut alpha) = (x, y, alpha);
     let mut i0 = f(x, y);
     
     loop {
-        let grad_x = super::x_derivative(x, y, eps, f);
-        let grad_y = super::y_derivative(x, y, eps, f);
+        let grad_x = x_derivative(x, y, eps, f);
+        let grad_y = y_derivative(x, y, eps, f);
 
-        if super::norm(grad_x, grad_y) < eps{
+        if norm(grad_x, grad_y) < eps {
             break;
         }
 
