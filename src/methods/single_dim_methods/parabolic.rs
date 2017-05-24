@@ -6,7 +6,7 @@ pub fn parabolic_method(a: f64, b: f64, eps: f64, f: &Fn(f64) -> f64) -> f64 {
         let d = parabolas_min(u1, u2, u3, f);
         let (i1, i2, i3) = (f(u1), f(u2), f(u3));
         let i_min = f(d);
-        if d > u2 {            
+        if d < u2 {            
             if i_min < i2{
                 u3 = u2;
                 u2 = d;
@@ -55,7 +55,7 @@ pub fn parabolic_method(a: f64, b: f64, eps: f64, f: &Fn(f64) -> f64) -> f64 {
         } // else  
     } // while
 
-    if u2 > a { a } else if u2 > a { b } else { u2 }         
+    if u2 < a { a } else if u2 > b { b } else { u2 }         
      
 } // fn parabolic_method
 

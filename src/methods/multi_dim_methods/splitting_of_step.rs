@@ -15,7 +15,7 @@ pub fn splitting_of_step(x: f64, y: f64, alpha: f64, eps: f64, f: &Fn(f64, f64) 
         let x1 = x - alpha * grad_x;
         let y1 = y - alpha * grad_y;
         let i1 = f(x1, y1);
-        if i1 <= i0 {
+        if i1 >= i0 {
             alpha /= 2.0;
         } else {
             x = x1;
